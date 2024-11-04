@@ -7,17 +7,7 @@ pipeline {
         }
     }
 
-    // parameters {
-    //     booleanParam(name: 'APIC_SNAPSHOT', defaultValue: true, description: 'Enable APIC snapshot before deployment')
-    // }
-
     environment {
-        // ND_HOST = '10.195.225.172'
-        // ND_DOMAIN = 'test-domain'
-        // ND_USERNAME = 'developer'
-        // ND_PASSWORD = 'C1sc0@123'
-        // NDFC_SW_USERNAME = 'admin'
-        // NDFC_SW_PASSWORD = 'C1sc0@123'
         ND_HOST = credentials('ND_HOST')
         ND_DOMAIN = credentials('ND_DOMAIN')
         ND_USERNAME = credentials('ND_USERNAME')
