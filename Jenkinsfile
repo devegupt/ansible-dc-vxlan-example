@@ -15,7 +15,7 @@ pipeline {
         ND_PASSWORD = credentials('ND_PASSWORD')
         NDFC_SW_USERNAME = credentials('NDFC_SW_USERNAME')
         NDFC_SW_PASSWORD = credentials('NDFC_SW_PASSWORD')
-        WEBEX_TOKEN = credentials('WEBEX_TOKEN')
+        // WEBEX_TOKEN = credentials('WEBEX_TOKEN')
         // WEBEX_ROOM_ID = ''
 
     }
@@ -58,11 +58,11 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            sh "BUILD_STATUS=${currentBuild.currentResult} python3 .ci/webex-notification-jenkins.py"
-            sh 'rm -rf *.txt *.yaml previous ${CONFIG_REPO_NAME} test_results rendered'
-            cleanWs()
-        }
-    }
+    // post {
+    //     always {
+    //         sh "BUILD_STATUS=${currentBuild.currentResult} python3 .ci/webex-notification-jenkins.py"
+    //         sh 'rm -rf *.txt *.yaml previous ${CONFIG_REPO_NAME} test_results rendered'
+    //         cleanWs()
+    //     }
+    // }
 }
