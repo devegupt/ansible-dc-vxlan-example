@@ -1,11 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'danischm/nac:0.1.4'
-            label 'digidev'
-            args '-u root'
-        }
-    }
+    agent any
+    // agent {
+    //     docker {
+    //         image 'danischm/nac:0.1.4'
+    //         label 'digidev'
+    //         args '-u root'
+    //     }
+    // }
 
     environment {
         ND_HOST = credentials('ND_HOST')
