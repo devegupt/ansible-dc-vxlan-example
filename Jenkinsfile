@@ -28,7 +28,7 @@ pipeline {
         stage('Setup') {
             steps {
                 // sh 'pip install --upgrade pip'
-                sh 'pip install -r requirements.txt'
+                // sh 'pip install -r requirements.txt'
                 sh 'git clone --depth 1 --branch master git@wwwin-github.cisco.com:netascode/nac-vxlan.git'
                 sh 'mkdir -p collections/ansible_collections/cisco'
                 sh 'ansible-galaxy collection install -p collections/ansible_collections/ -r requirements.yaml'
