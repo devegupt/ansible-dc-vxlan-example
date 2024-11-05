@@ -17,12 +17,12 @@ pipeline {
         // NDFC_SW_PASSWORD = credentials('NDFC_SW_PASSWORD')
         // WEBEX_TOKEN = credentials('WEBEX_TOKEN')
         // WEBEX_ROOM_ID = ''
-        ND_HOST=10.195.225.172
-        ND_DOMAIN=test-domain
-        ND_USERNAME=developer
-        ND_PASSWORD=C1sc0@123
-        NDFC_SW_USERNAME=admin
-        NDFC_SW_PASSWORD=C1sc0@123
+        ND_HOST = 10.195.225.172
+        ND_DOMAIN = test-domain
+        ND_USERNAME = developer
+        ND_PASSWORD = C1sc0@123
+        NDFC_SW_USERNAME = admin
+        NDFC_SW_PASSWORD = C1sc0@123
     }
 
     options {
