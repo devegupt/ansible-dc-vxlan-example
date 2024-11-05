@@ -9,20 +9,20 @@ pipeline {
     // }
 
     environment {
-        // ND_HOST = credentials('ND_HOST')
-        // ND_DOMAIN = credentials('ND_DOMAIN')
-        // ND_USERNAME = credentials('ND_USERNAME')
-        // ND_PASSWORD = credentials('ND_PASSWORD')
-        // NDFC_SW_USERNAME = credentials('NDFC_SW_USERNAME')
-        // NDFC_SW_PASSWORD = credentials('NDFC_SW_PASSWORD')
+        ND_HOST = credentials('ND_HOST')
+        ND_DOMAIN = credentials('ND_DOMAIN')
+        ND_USERNAME = credentials('ND_USERNAME')
+        ND_PASSWORD = credentials('ND_PASSWORD')
+        NDFC_SW_USERNAME = credentials('NDFC_SW_USERNAME')
+        NDFC_SW_PASSWORD = credentials('NDFC_SW_PASSWORD')
         // WEBEX_TOKEN = credentials('WEBEX_TOKEN')
         // WEBEX_ROOM_ID = ''
-        ND_HOST = 10.195.225.172
-        ND_DOMAIN = test-domain
-        ND_USERNAME = developer
-        ND_PASSWORD = C1sc0@123
-        NDFC_SW_USERNAME = admin
-        NDFC_SW_PASSWORD = C1sc0@123
+        // ND_HOST = 10.195.225.172
+        // ND_DOMAIN = test-domain
+        // ND_USERNAME = developer
+        // ND_PASSWORD = C1sc0@123
+        // NDFC_SW_USERNAME = admin
+        // NDFC_SW_PASSWORD = C1sc0@123
     }
 
     options {
@@ -46,7 +46,7 @@ pipeline {
             }
         stage('Validate') {
             steps {
-                sh 'pwd |& tee pwd_output.txt'
+                // sh 'pwd |& tee pwd_output.txt'
                 sh 'set -o pipefail && iac-validate host_vars/nac-ndfc1 -s nac-vxlan/schemas/schema.yaml -r collections/ansible_collections/cisco/nac_dc_vxlan/roles/validate/files/rules/ |& tee validate_output.txt'
             }
         }
