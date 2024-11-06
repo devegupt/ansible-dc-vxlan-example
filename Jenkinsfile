@@ -34,14 +34,14 @@ pipeline {
             steps {
                 // sh 'pip install --upgrade pip'
                 // sh 'pip install -r requirements.txt'
-                sh 'git clone --depth 1 --branch master git@wwwin-github.cisco.com:netascode/nac-vxlan.git'
+                sh 'git clone --depth 1 --branch master https://wwwin-github.cisco.com/devegupt/nac-vxlan.git'
 // + git clone --depth 1 --branch master git@wwwin-github.cisco.com:netascode/nac-vxlan.git
 // Cloning into 'nac-vxlan'...
 // Host key verification failed.
 // fatal: Could not read from remote repository
                 sh 'mkdir -p collections/ansible_collections/cisco'
                 sh 'ansible-galaxy collection install -p collections/ansible_collections/ -r requirements.yaml'
-                sh 'git clone --depth 1 --branch develop git@github.com:netascode/ansible-dc-vxlan.git collections/ansible_collections/cisco/nac_dc_vxlan'
+                sh 'git clone --depth 1 --branch develop https://github.com/devegupt/ansible-dc-vxlan.git collections/ansible_collections/cisco/nac_dc_vxlan'
                 }
             }
         stage('Validate') {
