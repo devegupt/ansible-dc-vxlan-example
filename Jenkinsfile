@@ -32,8 +32,8 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                // sh 'pip install --upgrade pip'
-                // sh 'pip install -r requirements.txt'
+                sh 'pip install --upgrade pip'
+                sh 'pip install -r requirements.txt'
                 sh 'git clone --depth 1 --branch master https://wwwin-github.cisco.com/devegupt/nac-vxlan.git'
 // + git clone --depth 1 --branch master git@wwwin-github.cisco.com:netascode/nac-vxlan.git
 // Cloning into 'nac-vxlan'...
