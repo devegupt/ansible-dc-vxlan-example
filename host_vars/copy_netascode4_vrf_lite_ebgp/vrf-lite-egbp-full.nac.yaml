@@ -1,0 +1,134 @@
+---
+vxlan:
+  overlay_extensions:
+    vrf_lites:
+      - name: myvrf_50001_vrf_lite
+        vrf: myvrf_50001
+        bgp:
+          local_as: 1111
+          best_path_as_path_relax: true
+          graceful_restart: true # Query: This doesn't show in the cli config.
+          graceful_restart_helper: true
+          address_family_ipv4_unicast:
+              additional_paths_receive: true
+              additional_paths_send: true
+              additional_paths_selection_route_map: test-map-globalaf4
+              default_originate: true
+              ebgp_distance: 25
+              ibgp_distance: 180
+              local_distance: 150
+          address_family_ipv6_unicast:
+              additional_paths_receive: true
+              additional_paths_send: true
+              additional_paths_selection_route_map: test-map-globalaf6
+              default_originate: true
+              ebgp_distance: 25
+              ibgp_distance: 180
+              local_distance: 200
+        redistribution:
+          - source: static
+            route_map: fabric-rmp-redist-static
+        switches:
+          - name: netascode4-ebgp-bl1
+            router_id: 1.1.1.1
+            loopback_id: 101
+            bgp:
+              local_as: 2222
+              best_path_as_path_relax: true
+              graceful_restart: true
+              graceful_restart_helper: true
+              address_family_ipv4_unicast:
+                additional_paths_receive: true
+                additional_paths_send: true
+                additional_paths_selection_route_map: test-map-switchaf4
+                default_originate: true
+                ebgp_distance: 25
+                ibgp_distance: 180
+                local_distance: 100
+              address_family_ipv6_unicast:
+                additional_paths_receive: true
+                additional_paths_send: true
+                additional_paths_selection_route_map: test-map-switchaf6
+                default_originate: true
+                ebgp_distance: 25
+                ibgp_distance: 180
+                local_distance: 200
+            static_routes: # Query: do we need tags per hop/ip basis. Shall we also need route preference, name and track?
+              - prefix: 0.0.0.0/0
+                route_tag: 12345
+                next_hops:
+                  - ip: 10.31.95.95
+                  - ip: 10.31.96.96
+              - prefix: 1.1.1.1/32
+                route_tag: 12344
+                next_hops:
+                  - ip: 10.31.94.95
+                  - ip: 10.31.93.96
+            redistribution:
+              - source: static
+                route_map: fabric-rmp-redist-static
+            bgp_peers:
+              - address: 10.31.95.95
+                remote_as: 65099
+                local_as: 3333
+                description: BGP Peer 1
+                update_source: Loopback101
+                bfd:
+                  enabled: true
+                disable_connected_check: true
+                remove_private_as: true
+                remove_private_as_all: true
+                ebgp_multihop: 2
+                address_family_ipv4_unicast:
+                    route_map_out: extcon-rmap-filter-v6
+                    route_map_in: route-map-azure-in
+                    weight: 100
+                    allow_as_in: true
+                    allow_as_in_number: 3
+                    send_community: true
+                    send_ext_community: true
+                    as_override: true
+                    next_hop_self: true
+                    default_originate: true
+                    route_reflector_client: false
+                address_family_ipv6_unicast:
+                    route_map_out: extcon-rmap-filter-v6
+                    route_map_in: route-map-azure-in
+                    weight: 100
+                    allow_as_in: true
+                    allow_as_in_number: 3
+                    send_community: true
+                    send_ext_community: true
+                    as_override: true
+                    next_hop_self: true
+                    default_originate: true
+                    route_reflector_client: false
+                password: 014903c077689077e5b4548432c3d91d # 3DES encrypted password
+          # - name: netascode4-ebgp-bl2
+          #   router_id: 2.2.2.2
+          #   loopback_id: 101
+          #   static_routes:
+          #     - prefix: 0.0.0.0/0
+          #       route_tag: 12345
+          #       next_hops:
+          #         - ip: 10.31.96.95
+          #   bgp:
+          #     best_path_as_path_relax: true
+          #     local_as: 1102
+          #     address_family_ipv4_unicast:
+          #         additional_paths_receive: true
+          #         additional_paths_send: true
+          #         additional_paths_selection_route_map:  addtionalpath_route_map
+          #   redistribution:
+          #     - source: direct
+          #       route_map: fabric-rmp-redist-direct
+          #     - source: static
+          #       route_map: fabric-rmp-redist-static
+          #   bgp_peers:
+          #     - address: 10.31.96.95
+          #       remote_as: 65099
+          #       local_as: 2222
+          #       ebgp_multihop: 2
+          #       description: k8s nodes
+          #       address_family_ipv4_unicast:
+          #           route_map_out: extcon-rmap-filter out
