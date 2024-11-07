@@ -30,7 +30,8 @@ pipeline {
                 sh 'rm -rf nac-vxlan'
                 sh 'git clone --depth 1 --branch master https://wwwin-github.cisco.com/devegupt/nac-vxlan.git'
                 sh 'mkdir -p collections/ansible_collections/cisco'
-                sh 'ansible-galaxy collection install -p collections/ansible_collections/ -r requirements.yaml'
+                sh 'ansible-galaxy collection install -p collections/ansible_collections/ -r requirements.yaml -f'
+                sh 'rm -rf collections/ansible_collections/cisco/nac_dc_vxlan'
                 sh 'git clone --depth 1 --branch develop https://github.com/devegupt/ansible-dc-vxlan.git collections/ansible_collections/cisco/nac_dc_vxlan'
                 }
             }
