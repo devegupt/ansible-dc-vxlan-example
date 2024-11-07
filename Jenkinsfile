@@ -27,6 +27,7 @@ pipeline {
             steps {
                 // sh 'pip install --upgrade pip'
                 // sh 'pip install -r requirements.txt'
+                sh 'rm -rf nac-vxlan'
                 sh 'git clone --depth 1 --branch master https://wwwin-github.cisco.com/devegupt/nac-vxlan.git'
                 sh 'mkdir -p collections/ansible_collections/cisco'
                 sh 'ansible-galaxy collection install -p collections/ansible_collections/ -r requirements.yaml'
