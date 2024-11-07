@@ -36,7 +36,7 @@ pipeline {
         stage('Validate') {
             steps {
                 // sh 'pwd |& tee pwd_output.txt'
-                sh 'set -o pipefail && iac-validate host_vars/nac-ndfc1 -s nac-vxlan/schemas/schema.yaml -r collections/ansible_collections/cisco/nac_dc_vxlan/roles/validate/files/rules/ |& tee validate_output.txt'
+                sh 'set -o pipefail && iac-validate host_vars/copy_netascode4_vrf_lite_ebgp -s nac-vxlan/schemas/schema.yaml -r collections/ansible_collections/cisco/nac_dc_vxlan/roles/validate/files/rules/ |& tee validate_output.txt'
             }
         }
         stage('Deploy') {
@@ -46,7 +46,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'set -o pipefail && iac-test -d host_vars/nac-ndfc1 -d nac-vxlan/defaults/defaults.yaml -f nac-vxlan/jinja_filters -t nac-vxlan/templates -o ./test_results |& tee test_output.txt'
+                sh 'set -o pipefail && iac-test -d host_vars/copy_netascode4_vrf_lite_ebgp -d nac-vxlan/defaults/defaults.yaml -f nac-vxlan/jinja_filters -t nac-vxlan/templates -o ./test_results |& tee test_output.txt'
             }
             post {
                 always {
