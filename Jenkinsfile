@@ -46,6 +46,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'set -o pipefail && iac-test -d host_vars/copy_netascode4_vrf_lite_ebgp -d nac-vxlan/defaults/defaults.yaml -f nac-vxlan/jinja_filters -t nac-vxlan/templates -o ./test_results |& tee test_output.txt'
+                sh 'env'
             }
             post {
                 always {
