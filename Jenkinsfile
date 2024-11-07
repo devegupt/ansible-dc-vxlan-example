@@ -14,8 +14,8 @@ pipeline {
         ND_PASSWORD = credentials('ND_PASSWORD')
         NDFC_SW_USERNAME = credentials('NDFC_SW_USERNAME')
         NDFC_SW_PASSWORD = credentials('NDFC_SW_PASSWORD')
-        // WEBEX_TOKEN = credentials('WEBEX_TOKEN')
-        // WEBEX_ROOM_ID = ''
+        WEBEX_TOKEN = credentials('WEBEX_TOKEN')
+        WEBEX_ROOM_ID = credentials('WEBEX_ROOM_ID')
     }
 
     options {
@@ -25,8 +25,6 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                // sh 'pip install --upgrade pip'
-                // sh 'pip install -r requirements.txt'
                 sh 'rm -rf nac-vxlan'
                 sh 'git clone --depth 1 --branch master https://wwwin-github.cisco.com/devegupt/nac-vxlan.git'
                 sh 'mkdir -p collections/ansible_collections/cisco'
@@ -37,7 +35,6 @@ pipeline {
             }
         stage('Validate') {
             steps {
-                // sh 'pwd |& tee pwd_output.txt'
                 sh 'set -o pipefail && iac-validate host_vars/copy_netascode4_vrf_lite_ebgp -s nac-vxlan/schemas/schema.yaml -r collections/ansible_collections/cisco/nac_dc_vxlan/roles/validate/files/rules/ |& tee validate_output.txt'
             }
         }
