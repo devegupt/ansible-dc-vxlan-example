@@ -4,5 +4,5 @@ all:
   children:
     ndfc:
       hosts:
-        nac-ndfc1:
+        copy_netascode4_vrf_lite_ebgp:
           ansible_host: "{{ lookup('ansible.builtin.env', 'ND_HOST') }}"
