@@ -16,6 +16,13 @@ pipeline {
         NDFC_SW_PASSWORD = credentials('NDFC_SW_PASSWORD')
         WEBEX_TOKEN = credentials('WEBEX_TOKEN')
         WEBEX_ROOM_ID = credentials('WEBEX_ROOM_ID')
+        DC_VXLAN_SCHEMA = "./nac-vxlan/schemas/schema.yaml"
+        DC_VXLAN_RULES = ""
+        ANSIBLE_HOST_KEY_CHECKING: 'false'
+        ANSIBLE_FORCE_COLOR: 'true'
+        ANSIBLE_COLLECTIONS_PATH: "./collections"
+        ANSIBLE_PERSISTENT_COMMAND_TIMEOUT: 1000
+        ANSIBLE_PERSISTENT_CONNECT_TIMEOUT: 1000
     }
 
     options {
@@ -48,6 +55,11 @@ pipeline {
                 sh 'set -o pipefail && iac-test -d host_vars/copy_netascode4_vrf_lite_ebgp -d nac-vxlan/defaults/defaults.yaml -f nac-vxlan/jinja_filters -t nac-vxlan/templates -o ./test_results |& tee test_output.txt'
                 sh 'env'
             }
+        // stage('cleanup') {
+        //     steps {
+        //         sh 'rm -rf nac-vxlan'
+        //         sh 'rm -rf collections'
+        //     }
             post {
                 always {
                     archiveArtifacts 'test_results/log.html, test_results/output.xml, test_results/report.html, test_results/xunit.xml'
@@ -62,5 +74,10 @@ pipeline {
     //         sh 'rm -rf *.txt *.yaml previous ${CONFIG_REPO_NAME} test_results rendered'
     //         cleanWs()
     //     }
+    // BUILD_URL
+    // JOB_URL
+    // BUILD_NUMBER
+    // JOB_BASE_NAME=ansible-dc-vxlan-testing
+    // JOB_NAME=netascode/ansible-dc-vxlan-example/ansible-dc-vxlan-testing
     // }
 }
