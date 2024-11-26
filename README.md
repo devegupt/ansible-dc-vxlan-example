@@ -1,6 +1,6 @@
 # Ansible NDFC VXLAN Example Repository
 
-This repository is designed to build the skeleton for the [Network as Code DC VXLAN Ansible Galaxy Collection](https://galaxy.ansible.com/ui/repo/published/cisco/nac_dc_vxlan/). Cloaning this repository will create a working structure that can be extended to automate your Cisco Nexus Data Center network using Nexus Dashboard Fabric Controller (NDFC).
+This repository is designed to build the skeleton for the [Network as Code DC VXLAN Ansible Galaxy Collection](https://galaxy.ansible.com/ui/repo/published/cisco/nac_dc_vxlan/). Cloning this repository will create a working structure that can be extended to automate your Cisco Nexus Data Center network using Nexus Dashboard Fabric Controller (NDFC).
 
 ## Setting up environment for the collection
 
@@ -20,7 +20,7 @@ This will clone the repository into the directory nac-vxlan.
 
 ### Step 2 - Create the virtual environment with pyenv
 
-In this directory create a new virtual environment and install a Python version of your choice. At the _time of this writting_, a commonly used version is Python version 3.10.13.  Command `pyenv install 3.10.13` will install this version. For detailed instructions please visit the [pyenv](https://github.com/pyenv/pyenv) site.
+In this directory create a new virtual environment and install a Python version of your choice. At the _time of writting_, a commonly used version is Python version 3.10.13.  Command `pyenv install 3.10.13` will install this version. For detailed instructions please visit the [pyenv](https://github.com/pyenv/pyenv) site.
 
 ```bash
 cd nac-vxlan
@@ -171,7 +171,7 @@ Additionally, if a pipeline is required, the environment variables can be stored
 The environment variables should be set in the shell where the playbook is executed. They are configured via the `export` command in the shell (bash). Using this template set the environment variables to the correct credentials for the NDFC controller and the fabric devices that will be managed by NDFC.
 
 ```bash
-# These are the credentials for 
+# These are the credentials for ND
 export ND_USERNAME=admin
 export ND_PASSWORD=Admin_123
 # These are the credentials for the devices in the inventory
@@ -217,6 +217,7 @@ vrf_delete_mode: false
 inventory_delete_mode: false
 vpc_delete_mode: false
 link_vpc_delete_mode: false
+policy_delete_mode: false
 ```
 
 **Note:** These variables are set to `false` by default to avoid accidental removal of configuration from NDFC that might impact the network. 
@@ -243,7 +244,6 @@ The playbook is located in the root of the repository and is called `vxlan.yaml`
     # Prepare service model for all subsequent roles
     #
     - role: cisco.nac_dc_vxlan.validate
-      tags: 'role_validate'
 
     # -----------------------
     # DataCenter Roles
