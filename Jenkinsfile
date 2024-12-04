@@ -14,15 +14,15 @@ pipeline {
         ND_PASSWORD = credentials('ND_PASSWORD')
         NDFC_SW_USERNAME = credentials('NDFC_SW_USERNAME')
         NDFC_SW_PASSWORD = credentials('NDFC_SW_PASSWORD')
-        WEBEX_TOKEN = credentials('WEBEX_TOKEN')
-        WEBEX_ROOM_ID = credentials('WEBEX_ROOM_ID')
-        DC_VXLAN_SCHEMA = "./nac-vxlan/schemas/schema.yaml"
-        DC_VXLAN_RULES = ""
-        ANSIBLE_HOST_KEY_CHECKING: 'false'
-        ANSIBLE_FORCE_COLOR: 'true'
-        ANSIBLE_COLLECTIONS_PATH: "./collections"
-        ANSIBLE_PERSISTENT_COMMAND_TIMEOUT: 1000
-        ANSIBLE_PERSISTENT_CONNECT_TIMEOUT: 1000
+        // WEBEX_TOKEN = credentials('WEBEX_TOKEN')
+        // WEBEX_ROOM_ID = credentials('WEBEX_ROOM_ID')
+        // DC_VXLAN_SCHEMA = "./nac-vxlan/schemas/schema.yaml"
+        // DC_VXLAN_RULES = ""
+        // ANSIBLE_HOST_KEY_CHECKING: 'false'
+        // ANSIBLE_FORCE_COLOR: 'true'
+        // ANSIBLE_COLLECTIONS_PATH: "./collections"
+        // ANSIBLE_PERSISTENT_COMMAND_TIMEOUT: 1000
+        // ANSIBLE_PERSISTENT_CONNECT_TIMEOUT: 1000
     }
 
     options {
