@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'danischm/nac:0.1.4'
-            label 'digidev'
+            // label 'digidev'
             args '-u root'
         }
     }
