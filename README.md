@@ -216,7 +216,8 @@ The `remove` role removes state from the NDFC controller and the devices managed
 Inside the example repository under `group_vars/ndfc` is a file called `ndfc.yaml` that contains the variables:
 
 ```yaml
-# Control Parameters for 'Remove' role tasks
+# Control Parameters for 'Remove' role tasks in VXLAN EVPN, External, and ISN fabrics
+edge_connections_delete_mode: false
 interface_delete_mode: false
 inventory_delete_mode: false
 link_fabric_delete_mode: false
@@ -225,6 +226,11 @@ network_delete_mode: false
 policy_delete_mode: false
 vpc_delete_mode: false
 vrf_delete_mode: false
+
+# Control Parameters for 'Remove' role tasks in Multisite fabric
+multisite_child_fabric_delete_mode: false
+multisite_network_delete_mode: false
+multisite_vrf_delete_mode: false
 ```
 
 **Note:** These variables are set to `false` by default to avoid accidental removal of configuration from NDFC that might impact the network. 
@@ -292,7 +298,7 @@ The validate role will automatically run if tags `role_create, role_deploy, role
 Example: Selectively Run `cisco.nac_dc_vxlan.create` role alone
 
 ```bash
-ansible-playbook -i inventory.yml vxlan.yml --tags role_create
+ansible-playbook -i inventory.yaml vxlan.yaml --tags role_create
 ```
 
 ## Service Model Data
@@ -399,7 +405,7 @@ vxlan:
       underlay_routing_protocol_tag: UNDERLAY
       underlay_rp_loopback_id: 250
       intra_fabric_interface_mtu: 9216
-      layer2_host_interfacde_mtu: 9216
+      layer2_host_interface_mtu: 9216
       unshut_host_interfaces: true
     ipv4:
       underlay_routing_loopback_ip_range: 10.0.0.0/22
